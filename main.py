@@ -96,7 +96,7 @@ def extract_all_listbox_items_static(page: Page, xpath: str):
     page.wait_for_load_state(state="networkidle")
     # page.wait_for_load_state(state="domcontentloaded")
     # page.wait_for_load_state(state="load")
-    page.wait_for_selector(f"xpath={xpath}", timeout=10000)
+    page.wait_for_selector(f"xpath={xpath}", timeout=20000)
     # Selector for the text content within each list item.
     # The text is inside a div with class 'text-om-t16' within an li with role 'option'.
     item_text_selector = f"xpath={xpath}"
@@ -305,9 +305,9 @@ def go_provinces(page: Page) -> List[Province]:
 def run(playwright: Playwright) -> None:
     browser = playwright.firefox.launch(
         headless=False,
-        proxy={
-            "server": "socks5://127.0.0.1:9050",
-        },
+        # proxy={
+        #     "server": "socks5://127.0.0.1:9050",
+        # },
     )
     context = browser.new_context()
     page = context.new_page()
